@@ -11,7 +11,7 @@
    * DNS
    * Appache
    * HTTP
-   * Nhookup
+   * Nslookup
    * FAI
    * FQDN
    * nginix, appache, iis
@@ -47,7 +47,7 @@
 
 ## Hypothèses
  * 8.8.8.8 est l'adresse du DNS de google
- * mslookup donne le domaine dans lequel on est et nous donne l'adresse IP correspondante
+ * nslookup donne le domaine dans lequel on est et nous donne l'adresse IP correspondante
  * Appache et IIS sont des paquets qui permettent de construire un serveur
  * On ne peut demander au FAI de mettre à jour un DNS nous correspondant
  * OVH donne les noms de domaines
