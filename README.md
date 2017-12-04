@@ -3,7 +3,7 @@
 ##Team
    * Animateur : **Hugo**
    * Secrétaire : **Emilien**
-   * Scribe : **Flo**
+   * Scribe : **Nico**
    * Gestionnaire : **Max**
 
 
