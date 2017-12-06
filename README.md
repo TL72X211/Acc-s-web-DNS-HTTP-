@@ -87,7 +87,7 @@ Ensemble de protocoles pour :
 -	Schéma de la BDD
 Un nom de domaine pleinement qualifié (FQDN) identifie de position l’hôte dans l’arborescence hiérarchique DNS en spécifiant la liste de noms par des points, de la racine vers l’hôte.
 
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/1.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/1.png)
  
 -	Com = organisations commerciales
 -	Edu = etablissement d’enseignement
@@ -103,7 +103,7 @@ La délégation du DNS :
 -	Besoin de distribuer la charge de maintenance d’une grande base de données DNS entre plusieurs serveurs DNS pour améliorer les performances de résolution de nom, et créer un environnement à tolérance de panne DNS.
 -	Nécessaire pour permettre l’affiliation d’organisation d’un hôte en incluant l’hôte dans les domaines appropriés.
  
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/2.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/2.png)
 
 
 Il existe trois endroits où on retrouve les noms de domaines, dans une zone :
@@ -123,18 +123,17 @@ On peut communiquer entre Client DNS et Serveur DNS, ou de Serveur DNS à Serveu
 -	Récursive : Force un serveur DNS pour répondre à une demande avec une défaillance ou une réponse de succès. C’est le cas des clients (résolveurs). Le serveur DNS doit contacter les autres serveurs DNS pour connaitre la réponse (vers le maître la majorité du temps, ou la ‘racine’), et il envois ensuite sa réponse vers le client.
 -	Itérative : Prévu pour répondre avec les meilleures informations locales. Si le DNS n’a pas la réponse, il envois juste au client une réponse négative.
  
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/3.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/3.png)
 
 
 Le TTL :
 Time to leave, c’est dans un enregistrement de ressources, un intervlle de temps utilisé par d’autres serveurs DNS pour déterminer combien de temps en cache les informations sont conservés avant d’expirer. Le minimum est d’une heure. Il vaut mieux le mettre long, en vue de ne pas avoir des informations périmées, et diminuer le trafic réseau (moins de requêtes entre DNS pour trouver un hôte)
 
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/4.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/4.png)
 
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/5.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/5.png)
  
  
-
 **PROTOCOLE**
 
 Il existe trois types de messages DNS :
@@ -144,7 +143,7 @@ Il existe trois types de messages DNS :
 Ils suivent tous trois un format de message courant :
 Un entête de 12 octets de longueur fixe et une position variable réservée à la question, réponse, autorité et des enregistrements de ressources DNS supplémentaires.
  
- ![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/6.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/6.png)
 
 Dans l’entête DNS pour une requête :
 -	ID Transaction [16 bits]
@@ -186,14 +185,13 @@ C’est un protocole extensible, facile utilisation, avec la possibilité d’aj
 Son n° de port est le 80, et on parle aussi de HTTPS pour le côté sécure (SSL ou TLS) avec port 443.
 Utilisation :
  
+ ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/7.png)
  
- ![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/7.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/8.png)
  
- ![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/8.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/9.png)
  
- ![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/9.png)
- 
- ![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/10.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/10.png)
  
 
 
@@ -223,8 +221,7 @@ Il existe plusieurs modèles sur la théorie de la communication, ils peuvent-ê
 
 **Protocoles :**
  
- 
- ![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/11.png)
+ ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/11.png)
 
 APPLICATION  : 
 NOM SYSTÈME : 
@@ -269,7 +266,7 @@ C’est les Etats-Unis qui gèrent les serveur racines.
 
 
 
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/12.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/12.png)
 
 
 
@@ -282,12 +279,12 @@ http://www.installerunserveur.com/creer-des-virtualhost
 -	/etc/apache2/sites-available
 -	/etc/apache2/sites-enabled
  
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/13.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/13.png)
 
 
 **WORKSHOP **
 
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/14.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/14.png)
  
 http://tvaira.free.fr/reseaux/tp10-dns.pdf
 /etc/hosts : C’est l’@ FQDN de chaque machine du réseau ainsi que son @IP. 
@@ -324,9 +321,7 @@ Cesi.fr
 
 On obtient les @IP des deux serveurs de messagerie du CESI.
  
-![]=(https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/15.png)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/15.png)
 
 Dig -x [@IP] permet de trouver un nom d’hôte à partir d’une @IP.
-
-
 
