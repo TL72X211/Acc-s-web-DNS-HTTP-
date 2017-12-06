@@ -224,41 +224,64 @@ Il existe plusieurs modèles sur la théorie de la communication, ils peuvent-ê
  ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/11.png)
 
 APPLICATION  : 
+
 NOM SYSTÈME : 
+
 DNS : Domain Name Service – Traduit les noms de domaines comme cisco.com en adresse IP
+
 CONFIGURATION D'HOTE :
+
 BOOTP : Bootstrap Protocol : Permet à une station sans disque de travail de découvrir sa propre adresse IP, l'adresse IP d'un BOOTP serveur sur le réseau. Un fichier peut être chargé dans la mémoire de démarrage de la machine. -> Remplacé par DHCP
+
 DHCP : Dynamic Host Configuration Protocol : Assigne dynamiquement des adresses IP aux clients au démarrage. Permet de réutiliser les adresses quand elles ne sont plus utilisées.
+
 EMAIL :
+
 SMTP : Simple Mail Transfert Protocol - Autorise les clients à envoyer des email vers les mail server, mais aussi les ses server vers les autres server
+
 POP (POP3) : Post Office Protocol - Autorise les clients à retrouver leur email à partir d'un mail serveur télécharge les email de l'email server vers le bureau.
+
 IMAP : - Internet Message Access Protocol  - Autorise les clients à accéder à leur email enregistré dans un mail server et maintient les email sur le serveur.
+
 TRANSFERT DE FICHIER :
+
 FTP : - File Transfert Protocol - Définit les règles qui autorisent un utilisateur sur un hôte à accéder et transférer les fichiers depuis et vers un autre hôte sur un réseau. Fournit également des fichiers importants.
+
 TFTP : - Trivial File Transfer Protocol – Un protocole sans connexion, sans retour d'accusé de réception - Utilisé moins que le FTP
+
 WEB :
+
 HTTP : HypertText Transfer Protocol - Définit les règles d'échanges de textes, des images, de sons, de vidéos et autres fichiers multimédias sur le WWW.
 
 TRANSPORT : 
 UDP : User Datagram Protocol – Autorise un processus qui tourne sur un hôte à envoyer des paquets à un autre processus sur un autre hôte. N'a pas de confirmation qu'une transmission datagram a bien été effectuée.
+
 TCP : Transmission Control Protocol – Autorise des communications fiables entre les processus tournant sur des hôtes séparés. Fiable, il y a des accusés de réceptions.
+
 INTERNET 
 IP : Internet Protocol - Reçoit les segments de messages des couches transports, paquette les messages, adresse les paquets pour les "end device".
+
 NAT : Network Address Translation -  Transforme les adresses IP privés dans une adresse IP publique.
 IP SUPPORT
+
 ICMP : Internet Control Message Protocol – Fournit un feedback depuis une destination hôte vers une source hôte, à propos des erreurs dans le délivrement des paquets.
+
 ROUTING PROTOCOLS 
 OSPF : Open Shortest Path First – Relie l'état d'un protocole de routage. Désign hiérarchique basé sur des zones. Ouvre un intérieur standard pour les protocoles de routages.
+
 EIGRP : Enhanced Interior Gateway Routing Protocol – La propriété de Cisco sur le routage, utilise des composés métriques basé sur la bande passante, les délais, le chargement et la fiabilité.
 
 ACCES RESEAU 
 ARP : Adress Resolution Protocol – Fournit une adresse dynamique mappé, entre une IP adresse, et un accès physique.
+
 PPP : Point-to-Point Protocol – Fournit un semblant de paquets d'encapsulations pour la transmission sur une liaison série.
+
 Ethernet : Définit les règles pour le câblage et le signalement des standards d'un réseau accédant aux couches.
+
 Interface Drivers : Fournit des instructions à la machine pour contrôler une certaine interface sur un équipement réseau.
 
 
-**Les treize serveurs racines **
+**Les treize serveurs racines**
 Neuf de ces serveurs ne sont pas de simples machines mais correspondent à plusieurs installations réparties dans des lieux géographiques divers, il y a ainsi plus de 130 sites dans 53 pays qui hébergent un serveur racine du DNS, grâce  à la technologie « anycast »
  
 C’est les Etats-Unis qui gèrent les serveur racines.
