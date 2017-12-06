@@ -1,6 +1,6 @@
-#WorkShop DNS
+# WorkShop DNS
 
-##Configuration d'un client DNS
+## Configuration d'un client DNS
 
  * Que contient votre fichier /etc/hosts ?
  Les noms d'hôtes attribués à chaque adresse IP, le domaine e tsous-domaine auquel ils appartiennent et leur Alias
@@ -18,9 +18,9 @@
  En dessous de la gateway :  
  dns-nameservers 208.67.222.222 208.67.220.220
 
-##Requete DNS
+## Requete DNS
 
- * Determiner l'adresse IP de www.cesi.fr
+ * Determiner l'adresse IP de www.cesi.fr  
  dig www.cesi.fr  
  réponse 194.2.77.162
 
@@ -59,7 +59,7 @@
  cesi.fr  
  L'adresse trouvée est : cesi-fr.mail.protection.outlook.com.
 
-##Installation et configuration d'un serveur DNS
+## Installation et configuration d'un serveur DNS
 
  * Installation des paquets
  apt-get install bind9 bind9utils dnsutils
