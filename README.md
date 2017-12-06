@@ -18,7 +18,11 @@ Par exemple : mymail.somecollege.edu
 Le hostname est mymail, et il est dans le domaine, ‘somecollege.edu ‘, edu est le TLD (top level domain)
    * nginx ,  iis : Nginx est un logiciel libre de serveur Web (ou http), ainsi qu’un proxy inverse. Sa particularité est qu’il est un serveur asynchrone, il utilise les changements d’état pour gérer plusieurs connexions en même temps. (Ainsi, performances élevées + consommation de mémoire faible). 
 IIS est un serveur Web pour les différents systèmes d’exploitation Windows NT.
-   * registrar : registre. C’est l’endroit où sont enregistrés tout les DNS.
+   * registrar : 
+C'est un organisme accrédité par les autorités compétentes en matière d'attribution et de gestion des noms de domaine.
+Le métier de registrar consiste principalement à la vente et à la gestion des noms de domaines auprès du grand public. Ainsi dans l'organisation du système de nommage, le registrar est le dernier intermédiaire technique accessible au public pour enregistrer un nom de domaine.
+L'activité de registrar est complémentaire avec celles d'hébergeur, de fournisseur d'accès et d'attribution des adresses IP. L'ensemble de ces acteurs interviennent dans le fonctionnement d'Internet.
+
    * Virtual Host : Hébergement virtuel, méthode que le serveurs (web)utilisent pour accueillir plus d’un nom de domaine sur un même ordinateur, parfois sur la même @IP, tout en maintenant une gestion séparée de chacun de ces noms. Cela permet de partager les ressources du serveur (mémoire, processeur). On y retrouve : Un nom, une @IP (pour chaque nom) (+N° de port rarement, car peu ergonomique).
    * enregistrement DNS de type A : Lien entre un nom unique et une @IPv4. Ainsi, on aura un nom de domaine qui pointera sur le serveur trouvé à une @IP données. On y retrouve un TTL, qui lui donne une durée de vie.
    * résolution de nom : Fais référence au DNS.
