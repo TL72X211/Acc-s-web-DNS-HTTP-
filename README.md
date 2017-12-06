@@ -352,3 +352,11 @@ On obtient les @IP des deux serveurs de messagerie du CESI.
 
 Dig -x [@IP] permet de trouver un nom d’hôte à partir d’une @IP.
 
+**Canaux de communication**
+3 types :
+-Cuivre
+-Fibre optiques
+-Ondes
+
+Les canaux sont les moyens par lesquels un message est transmis. C'est un media.
+
