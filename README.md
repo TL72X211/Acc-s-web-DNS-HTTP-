@@ -1,6 +1,7 @@
 **Accès web (DNS, HTTP)**
 --------------------------
 
+
 ##Team
    * Animateur : **Hugo**
    * Secrétaire : **Emilien**
@@ -47,7 +48,7 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
    * aucune
 
 ## Problématique
-   * Comment faire en sorte que notre FAI reconnaisse notre DNS
+   * Comment faire en sorte que notre FAI reconnaisse notre DNS ?
 
 
     
@@ -67,216 +68,15 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
 ## Plan d'action
 ### Études
 #### **DNS**
- 
-Code d�erreurs :
-**Résolution de noms directe**
-Dans un réseau IP, lorsqu’une machine A veut communiquer avec une machine B, la machine A connaît le nom FQDN de B.
-Par exemple, lorsqu’on navigue sur le net, on connaît en général le nom FQDN des serveurs qu’on visite (exemple www.microsoft.fr.).
-Pour que A puisse communiquer avec B grâce au protocole IP, A va avoir besoin de connaître l’adresse IP de B.
-A doit posséder un moyen d’effectuer la résolution de noms directe, c’est-à-dire un moyen de trouver l’adresse IP de B à partir de son nom qualifié.
-Le résolveur est le programme chargé de cette opération.
 
-**Résolution de noms inverse**
-La machine B reçoit un datagramme IP en provenance de A. Ce datagramme contient l’adresse IP de A. B peut avoir besoin de connaître le nom FQDN de la machine A.
-B doit donc être capable de trouver le nom FQDN de A à partir de son adresse IP. C’est ce qu’on appelle la résolution de noms inverse.
-Le résolveur est également chargé de cette opération.
-
-**Résolution de nom par serveur DNS (Domain Name System)**
-On installe un serveur de noms sur le réseau. Chaque machine du réseau doit connaître l’adresse IP de ce serveur DNS. Dès qu’une machine veut effectuer une résolution de noms directe ou inverse, elle va interroger le serveur de noms. L’administrateur doit configurer le serveur de noms pour que ce dernier connaisse l’adresse IP et le nom de toutes les machines du réseau.
-
-Une bdd dns se compose d’enregistrements de ressource
-
-**Types d’enregistrements :**
-
-A ou adresse fait correspondre un nom d’hôte, de domaine ou sous-domaine en ipv4
-CNAME : canonical name record permet de faire un alias vers un autre domaine
-MX : mail exchange définit les serveurs courriel 
-PTR : pointer record associe un IP à un nom de domaine on l’appelle également reverse puisqu’il fait l’inverse d’un enregistrement A
-NS : name server défini les serveurs DNS de ce domaine
-SOA start of authority : info générales : serveur principal, courriel de contact, TTL, n°de série de la zone (version de la zone
-NAPTR name authority Pointer record : donne accès à des règles de réécriture de l’information ( ?)
-TXT permet à l’admin d’inserer un texte quelconque dans un enregistrement DNS
-  * Protocole HTTP
-  
-  **Pierre M**
-  
-  Requête:
-  
-  * GET demande un fichier
-  * HEAD info sur la ressource
-  * POST modifie une ressource
-  * CONNECT : utiise un proxy comme tunnel de communication
-  * TRACE : retourne ce qu'il a reçu
-  * PUT : ajouter une ressource
-  * DELETE : suppr une ressource
-  
-  
-  requête :
-  * ligne de commande 
-  * en-tête
-  * corps de requête
-  
-  réponse:
-  * ligne de statut
-  * entête
-  * corps de réponse
-  
-  
-  **Raph**
-  
-  paramètres des en-têtes (défini ce qu'on autorise ou demande):
-  
-  accept: type de contenu accéptés par le navigateur
-  accetp char-set : jeu de caractère accepté
-  accept encoding : encodage accepté
-  language : language
-  content encoding : encodage
-  coentent length : longeur du corp de la requête
-  date : date de début du transfert
-  
-  etc
-Code	Message	Description
-10x	Message d'information	Ces codes ne sont pas utilis�s dans la version 1.0 du protocole
-20x	R�ussite	Ces codes indiquent le bon d�roulement de la transaction
-200	OK	La requ�te a �t� accomplie correctement
-201	CREATED	Elle suit une commande POST, elle indique la r�ussite, le corps du reste du document est sens� indiquer l'URL � laquelle le document nouvellement cr�� devrait se trouver.
-202	ACCEPTED	La requ�te a �t� accept�e, mais la proc�dure qui suit n'a pas �t� accomplie
-203	PARTIAL INFORMATION	Lorsque ce code est re�u en r�ponse � une commande GET, cela indique que la r�ponse n'est pas compl�te.
-204	NO RESPONSE	Le serveur a re�u la requ�te mais il n'y a pas d'information � renvoyer
-205	RESET CONTENT	Le serveur indique au navigateur de supprimer le contenu des champs d'un formulaire
-206	PARTIAL CONTENT	Il s'agit d'une r�ponse � une requ�te comportant l'en-t�te range. Le serveur doit indiquer l'en-t�te content-Range
-30x	Redirection	Ces codes indiquent que la ressource n'est plus � l'emplacement indiqu�
-301	MOVED	Les donn�es demand�es ont �t� transf�r�es � une nouvelle adresse
-302	FOUND	Les donn�es demand�es sont � une nouvelle URL, mais ont cependant peut-�tre �t� d�plac�es depuis...
-303	METHOD	Cela implique que le client doit essayer une nouvelle adresse, en essayant de pr�f�rence une autre m�thode que GET
-304	NOT MODIFIED	Si le client a effectu� une commande GET conditionnelle (en demandant si le document a �t� modifi� depuis la derni�re fois) et que le document n'a pas �t� modifi� il renvoie ce code.
-40x	Erreur due au client	Ces codes indiquent que la requ�te est incorrecte
-400	BAD REQUEST	La syntaxe de la requ�te est mal formul�e ou est impossible � satisfaire
-401	UNAUTHORIZED	Le param�tre du message donne les sp�cifications des formes d'autorisation acceptables. Le client doit reformuler sa requ�te avec les bonnes donn�es d'autorisation
-402	PAYMENT REQUIRED	Le client doit reformuler sa demande avec les bonnes donn�es de paiement
-403	FORBIDDEN	L'acc�s � la ressource est tout simplement interdit
-404	NOT FOUND	Classique ! Le serveur n'a rien trouv� � l'adresse sp�cifi�e. Parti sans laisser d'adresse... :)
-50x	Erreur due au serveur	Ces codes indiquent qu'il y a eu une erreur interne du serveur
-500	INTERNAL ERROR	Le serveur a rencontr� une condition inattendue qui l'a emp�ch� de donner suite � la demande (comme quoi il leur en arrive des trucs aux serveurs...)
-501	NOT IMPLEMENTED	Le serveur ne supporte pas le service demand� (on ne peut pas tout savoir faire...)
-502	BAD GATEWAY	Le serveur a re�u une r�ponse invalide de la part du serveur auquel il essayait d'acc�der en agissant comme une passerelle ou un proxy
-503	SERVICE UNAVAILABLE	Le serveur ne peut pas vous r�pondre � l'instant pr�sent, car le trafic est trop dense (toutes les lignes de votre correspondant sont occup�es veuillez rappeler ult�rieurement)
-504	GATEWAY TIMEOUT	La r�ponse du serveur a �t� trop longue vis-�-vis du temps pendant lequel la passerelle �tait pr�par�e � l'attendre (le temps qui vous �tait imparti est maintenant �coul�...)
-  Port : 
-  * 80 http
-  * 443 https
-  
-  portocole:
-  * http utilise tcp
-  * dns utilise udp ou tcp
-  
-  100 = informtion
-  200 = ok
-  300 = redirection
-  500 = erreur serveur
-  
-  
-  seveur: propose un service
-  http://www.truc.fr
-  on passe www.truc.fr en argument du protocole
-  
-  note : un server html ne peut pas faire de php par défaut 
-  
-  
-  
-  * Fonctionnement de mslookup
-  * Organismes gérant les protocoles
-   * ICANN gère les DNS et sa branche IANA IP aux USA
-   * IEEE 
-   * IETF internet engineering taskforce
-   * AFNIC IP en france
-   * Les registrar qui vendent des noms de domaines (font le relai avec l'ICANN)
-####**Théorie de communication**
-Apparue en même temps que la théorie de l’information, son but est de formaliser et modéliser la relation homme-machine 
-Il y a communication lorsqu’on émet ou reçoit un message et qu’on donne une signification au message, ce qui permet de les comprendre
-
-![](imgNico/3.png)
-  
-  on a un canal (media)
-  éméteur
-  recepteur
-  un message 
-  et des règles de communication
-  
-  pour http on a donc 
-  * canal :
-  * récepteur : serveur
-  * éméteur : navigateur
-  * langage : structure de la reqête
-  * message : post paramètres
-  
-  * Format des messages (émission/réception)
-Simplex : de l’un vers l’autre rien d’autre (radio)
-Half duplex : dans les 2 sens mais pas en même temps (walkie-talkie)
-Full-Duplex : 2 sens en même temps
- 
-  * Messages
-Messages dns ?
-Requêtes 
-Réponses
-Mise à jour
-
-![](imgNico/4.png)
- 
-En-tête DNS : 
-Id de transcription : 16 bits qui identifient une transaction dns spécifique, créé par l expéditeur et copié par le répondeur dans le message de réponse, le client DNS
-Demande/réponse : flag de 1b, 0 pour une demande 1 pour une réponse
-Code d’opération : 4 bits représentant l’opération de service de nom du paquet
-Réponse faisant autorité : flag
-Troncature : flag 1 si le nombre total de réponses dépasse le datagrame UDP, sauf si les datagrames UDP > 512 octets ou EDNS0 est activé
-Récursivité souhaitée : flag 1 récusif, 0 non récursif, si le serveur DNS reçoit un message avec ce flag a 0 il retourne une liste d’autre serveurs DNS que le client peut contacter
-Récursivité disponible : flag 1 = le serveur peut traiter les requêtes récursives
-Réservé : 3bis réservés à 0
-Code de retour : 4its de code d’erreur, par exemple :0 = réponse correcte,  3 erreur nom non existant
-Nb d’enregistrements de ressource de question : 16bits représentant le nb d’entrées dans la section question
-Nb d’enregistrement de ressource réponse : 16bits nb d’entrée dans la section réponse
-Nb d’enregistrement de ressource autorité : 16bits
-Nb d’enregistrement de ressources supplémentaire : 16bits
-
-Question de requête DNS :
-Nom de la question : nom de domaine interrogé
-Représenté 
-
-  * Canaux de communication
-    * Media de transmission de l’information
-    * Cuivres
-    * Fibre optique
-    * Ondes électromagnétiques
-  * Implémentation des protocoles
-  
-####**Couches des différents protocoles**
- 
-![](imgNico/5.jpg)
-  émilien
-  récursivité : si le serveur peut demander à un autre serveur
-  
-  
-  
-  serveurs http :
-  apache
-  enginex
-  light
-###Réalistions
-####**Résoudre le problème**
-####**Connaitre "les 13"**
-Un serveur racine du DNS est un serveur DNS qui réponds aux requêtes qui concernent les noms de domaines de premier niveau TLD) et les redirige vers le serveur DNS de premier niveau concerné (ils sont le '.' au dessus des TLD dans la hiérarchie)
-
-Ils sont gérés sous l’autorité de l’ICANN et sont au nombre de 13
-
-![](imgNico/6.png)
- 
-
- hugo
-![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/1.png)
+**Architecture** 
 Ensemble de protocoles pour :
 -	Interroger et MAJ la base de données d’un serveur DNS
 -	Réplication des informations dans la BDD entre serveurs
 -	Schéma de la BDD
+
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/1.png)
+
 Un nom de domaine pleinement qualifié (FQDN) identifie de position l’hôte dans l’arborescence hiérarchique DNS en spécifiant la liste de noms par des points, de la racine vers l’hôte.
 -	Com = organisations commerciales
 -	Edu = etablissement d’enseignement
@@ -286,33 +86,61 @@ Un nom de domaine pleinement qualifié (FQDN) identifie de position l’hôte da
 -	Mil = Organisations gouvernementales militaires
 -	Arpa = DNS inverse
 -	« xx » code de pays à deux lettres.
+
+La délégation du DNS :
+
+* Déléguer la gestion d’un domaine DNS à un nombre d’organisations ou départements au sein d’une organisation.
+* Besoin de distribuer la charge de maintenance d’une grande base de données DNS entre plusieurs serveurs DNS pour améliorer les performances de résolution de nom, et créer un environnement à tolérance de panne DNS.
+* Nécessaire pour permettre l’affiliation d’organisation d’un hôte en incluant l’hôte dans les domaines appropriés.
+
 ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/2.png)
+
 Comment interagir avec notre base de données ? :
 On peut communiquer entre Client DNS et Serveur DNS, ou de Serveur DNS à Serveur DNS.
 -	Récursive : Force un serveur DNS pour répondre à une demande avec une défaillance ou une réponse de succès. C’est le cas des clients (résolveurs). Le serveur DNS doit contacter les autres serveurs DNS pour connaitre la réponse (vers le maître la majorité du temps, ou la ‘racine’), et il envois ensuite sa réponse vers le client.
 -	Itérative : Prévu pour répondre avec les meilleures informations locales. Si le DNS n’a pas la réponse, il envois juste au client une réponse négative.
+
 ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/3.png)
 ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/4.png)
-![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/5.png)
-**PROTOCOLE**
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/5.png) 
+
+**Types de résolution :**
+
+**Résolution de nom directe**
+Dans un réseau IP, lorsqu’une machine A veut communiquer avec une machine B, la machine A connaît le nom FQDN de B.
+Par exemple, lorsqu’on navigue sur le net, on connaît en général le nom FQDN des serveurs qu’on visite (exemple www.microsoft.fr.).
+Pour que A puisse communiquer avec B grâce au protocole IP, A va avoir besoin de connaître l’adresse IP de B.
+A doit posséder un moyen d’effectuer la résolution de noms directe, c’est-à-dire un moyen de trouver l’adresse IP de B à partir de son nom qualifié.
+Le résolveur est le programme chargé de cette opération.
+
+**Résolution de nom inverse**
+La machine B reçoit un datagramme IP en provenance de A. Ce datagramme contient l’adresse IP de A. B peut avoir besoin de connaître le nom FQDN de la machine A.
+B doit donc être capable de trouver le nom FQDN de A à partir de son adresse IP. C’est ce qu’on appelle la résolution de noms inverse.
+Le résolveur est également chargé de cette opération.
+
+**Résolution de nom par serveur DNS (Domain Name System)**
+On installe un serveur de noms sur le réseau. Chaque machine du réseau doit connaître l’adresse IP de ce serveur DNS. Dès qu’une machine veut effectuer une résolution de noms directe ou inverse, elle va interroger le serveur de noms. L’administrateur doit configurer le serveur de noms pour que ce dernier connaisse l’adresse IP et le nom de toutes les machines du réseau.
+
+Une bdd DNS se compose d’enregistrements de ressource
+
+**Types d’enregistrements :**
+
+* A ou adresse : fait correspondre un nom d’hôte, de domaine ou sous-domaine en ipv4
+* CNAME : canonical name record permet de faire un alias vers un autre domaine
+* MX : mail exchange définit les serveurs courriel 
+* PTR : pointer record associe un IP à un nom de domaine on l’appelle également reverse puisqu’il fait l’inverse d’un enregistrement A
+* NS : name server défini les serveurs DNS de ce domaine
+* SOA start of authority : info générales : serveur principal, courriel de contact, TTL, n°de série de la zone (version de la zone
+* NAPTR name authority Pointer record : donne accès à des règles de réécriture de l’information ( ?)
+* TXT permet à l’admin d’inserer un texte quelconque dans un enregistrement DNS
+
+####**PROTOCOLES**
 Il existe trois types de messages DNS :
 
 -	Message
- 
- 
-
-
- 
-
-
- 
-
- 
-**1 – Etude du DNS :**
-
-
 -	Réponses
 -	Mises à jour 
+
 Ils suivent tous trois un format de message courant :
 Un entête de 12 octets de longueur fixe et une position variable réservée à la question, réponse, autorité et des enregistrements de ressources DNS supplémentaires.
 ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/6.png)
@@ -356,7 +184,9 @@ Dans l’entête DNS pour une MAJ :
 HyperText Transfer Protocol, est un protocole de communication client-serveur développé pour le WWW. C’est un langage qui va permettre au client de communiquer avec un serveur connecté.
 C’est un protocole extensible, facile utilisation, avec la possibilité d’ajouter simplement des entêtes, et de progresser au fur et à mesure de l’ajout de nouvelles fonctionnalités sur le web.
 Son n° de port est le 80, et on parle aussi de HTTPS pour le côté sécure (SSL ou TLS) avec port 443.
+
 Utilisation :
+
  ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/7.png)
  
  
@@ -372,87 +202,177 @@ GET /fichier.ext?variable=valeur&variable2=valeur2 HTTP/1.1
 On utilise les ‘ ? ’pour séparer la liste des variables, et un & pour annoncer une autre variable.
 Pour les utiliser, on doit utiliser des sockets, par exemple en PHP. Il s’appuie sur du TCP pour faire circuler les requêtes.
 
-           rr.wikimedia.org
- Aliases:  www.wikipedia.org
- Address:  91.198.174.2
- Nom :    rr.esams.wikimedia.org
- Réponse ne faisant pas autorité :
+
+Codes de statut retournés par une réponse :
+
+* 100 = informtion
+* 200 = ok
+* 300 = redirection
+* 400 = erreur de ressource
+* 500 = erreur serveur
+
+* 10x	Message d'information	Ces codes ne sont pas utilisés dans la version 1.0 du protocole
+* 20x	Réussite	Ces codes indiquent le bon déroulement de la transaction
+* 200	OK	La reqête a été accomplie correctement
+* 201	CREATED	Elle suit une commande POST, elle indique la réussite, le corps du reste du document est sensé indiquer l'URL à laquelle le document nouvellement créé devrait se trouver.
+* 202	ACCEPTED	La requête a été acceptée, mais la procédure qui suit n'a pas été accomplie
+* 203	PARTIAL INFORMATION	Lorsque ce code est reçu en réponse à une commande GET, cela indique que la réponse n'est pas complète.
+* 204	NO RESPONSE	Le serveur a reçu la requête mais il n'y a pas d'information à renvoyer
+* 205	RESET CONTENT	Le serveur indique au navigateur de supprimer le contenu des champs d'un formulaire
+* 206	PARTIAL CONTENT	Il s'agit d'une réponse à une requête comportant l'en-tête range. Le serveur doit indiquer l'en-tête content-Range
+* 30x	Redirection	Ces codes indiquent que la ressource n'est plus à l'emplacement indiqué
+* 301	MOVED	Les données demandées ont été transférées à une nouvelle adresse
+* 302	FOUND	Les données demandées sont à une nouvelle URL, mais ont cependant peut-être été déplacées depuis...
+* 303	METHOD	Cela implique que le client doit essayer une nouvelle adresse, en essayant de préférence une autre méthode que GET
+* 304	NOT MODIFIED	Si le client a effectué une commande GET conditionnelle (en demandant si le document a été modifié depuis la dernière fois) et que le document n'a pas été modifié il renvoie ce code.
+* 40x	Erreur due au client	Ces codes indiquent que la requête est incorrecte
+* 400	BAD REQUEST	La syntaxe de la requête est mal formulée ou est impossible à satisfaire
+* 401	UNAUTHORIZED	Le paramètre du message donne les spécifications des formes d'autorisation acceptables. Le client doit reformuler sa requête avec les bonnes données d'autorisation
+* 402	PAYMENT REQUIRED	Le client doit reformuler sa demande avec les bonnes données de paiement
+* 403	FORBIDDEN	L'accès à la ressource est tout simplement interdit
+* 404	NOT FOUND	Classique ! Le serveur n'a rien trouvé à l'adresse spécifiée. Parti sans laisser d'adresse... :)
+* 50x	Erreur due au serveur	Ces codes indiquent qu'il y a eu une erreur interne du serveur
+* 500	INTERNAL ERROR	Le serveur a rencontré une condition inattendue qui l'a empêché de donner suite à la demande (comme quoi il leur en arrive des trucs aux serveurs...)
+* 501	NOT IMPLEMENTED	Le serveur ne supporte pas le service demandé (on ne peut pas tout savoir faire...)
+* 502	BAD GATEWAY	Le serveur a reçu une réponse invalide de la part du serveur auquel il essayait d'accéder en agissant comme une passerelle ou un proxy
+* 503	SERVICE UNAVAILABLE	Le serveur ne peut pas vous répondre à l'instant présent, car le trafic est trop dense (toutes les lignes de votre correspondant sont occupées veuillez rappeler ultérieurement)
+* 504	GATEWAY TIMEOUT	La réponse du serveur a été trop longue vis-à-vis du temps pendant lequel la passerelle était préparée à l'attendre (le temps qui vous était imparti est maintenant écoulé...)
+
+####**Théorie de communication**
+Apparue en même temps que la théorie de l’information, son but est de formaliser et modéliser la relation homme-machine 
+Il y a communication lorsqu’on émet ou reçoit un message et qu’on donne une signification au message, ce qui permet de les comprendre
+
+![](imgNico/3.png)
+  
+  on a :
+  
+  * un canal (media)
+  * éméteur
+  * recepteur
+  * un message 
+  * des règles de communication
+  
+pour http on a donc 
+
+  * canal :
+  * récepteur : serveur
+  * éméteur : navigateur
+  * langage : structure de la reqête
+  * message : post paramètres  
+  * Format des messages (émission/réception)
+
+Types de communications :
+
+* Simplex : de l’un vers l’autre rien d’autre (radio)
+* Half duplex : dans les 2 sens mais pas en même temps (walkie-talkie)
+* Full-Duplex : 2 sens en même temps
  
- Address:  212.27.40.240
- Serveur :  dns1.proxad.net
-> nslookup www.wikipedia.org
-**Fonctionnement de nslookup**
-**Organismes gérant les protocoles**
-C’est l’IANA, du département de l’ICANN, une société américaine privée à but non lucratif qui supervise l’allocation globale des @IP, la gestion de la zone racine dans le DNS. (DNS qui répond aux requêtes, et qui redirige vers le serveur DNS du premier niveau concerné, càd .com, .fr, .net …). Elle s’occupe également des numéros de protocoles, et de nombreux protocoles IP. C’est elle qui délivre la liste des numéros de ports TCP et UDP.
+Canaux de communication :
+
+   * Media de transmission de l’information
+   * Cuivres
+   * Fibre optique
+   *  Ondes électromagnétiques
+   * Implémentation des protocoles
+
+####**Organismes gérant les protocoles**
+
+C’est l’IANA,  département de l’ICANN, une société américaine privée à but non lucratif qui supervise l’allocation globale des @IP, la gestion de la zone racine dans le DNS. (DNS qui répond aux requêtes, et qui redirige vers le serveur DNS du premier niveau concerné, càd .com, .fr, .net …). Elle s’occupe également des numéros de protocoles, et de nombreux protocoles IP. C’est elle qui délivre la liste des numéros de ports TCP et UDP.
 En France, c’est l’AFNIC (Association Française pour le nomage Internet en coopération), qui gère les domaines internet nationaux de premier niveau).
 
 
-Interface Drivers : Fournit des instructions à la machine pour contrôler une certaine interface sur un équipement réseau.
+####**Fonctionnement de nslookup**
 
-Ethernet : Définit les règles pour le câblage et le signalement des standards d'un réseau accédant aux couches.
+\>  nslookup www.wikipedia.org
 
-PPP : Point-to-Point Protocol – Fournit un semblant de paquets d'encapsulations pour la transmission sur une liaison série.
+ Serveur :  dns1.proxad.net
+ Address:  212.27.40.240
+ 
+ Réponse ne faisant pas autorité :
+ Nom :    rr.esams.wikimedia.org
+ Address:  91.198.174.2
+ Aliases:  www.wikipedia.org
+           rr.wikimedia.org
 
-ARP : Adress Resolution Protocol – Fournit une adresse dynamique mappé, entre une IP adresse, et un accès physique.
-EIGRP : Enhanced Interior Gateway Routing Protocol – La propriété de Cisco sur le routage, utilise des composés métriques basé sur la bande passante, les délais, le chargement et la fiabilité.
-ACCES RESEAU 
-
-
-OSPF : Open Shortest Path First – Relie l'état d'un protocole de routage. Désign hiérarchique basé sur des zones. Ouvre un intérieur standard pour les protocoles de routages.
-ROUTING PROTOCOLS 
-
-ICMP : Internet Control Message Protocol – Fournit un feedback depuis une destination hôte vers une source hôte, à propos des erreurs dans le délivrement des paquets.
-
-IP SUPPORT
-NAT : Network Address Translation -  Transforme les adresses IP privés dans une adresse IP publique.
-
-IP : Internet Protocol - Reçoit les segments de messages des couches transports, paquette les messages, adresse les paquets pour les "end device".
-INTERNET 
-
-TCP : Transmission Control Protocol – Autorise des communications fiables entre les processus tournant sur des hôtes séparés. Fiable, il y a des accusés de réceptions.
-
-UDP : User Datagram Protocol – Autorise un processus qui tourne sur un hôte à envoyer des paquets à un autre processus sur un autre hôte. N'a pas de confirmation qu'une transmission datagram a bien été effectuée.
-TRANSPORT : 
-HTTP : HypertText Transfer Protocol - Définit les règles d'échanges de textes, des images, de sons, de vidéos et autres fichiers multimédias sur le WWW.
-
-
-WEB :
-
-TFTP : - Trivial File Transfer Protocol – Un protocole sans connexion, sans retour d'accusé de réception - Utilisé moins que le FTP
-FTP : - File Transfert Protocol - Définit les règles qui autorisent un utilisateur sur un hôte à accéder et transférer les fichiers depuis et vers un autre hôte sur un réseau. Fournit également des fichiers importants.
-
-
-TRANSFERT DE FICHIER :
-
-IMAP : - Internet Message Access Protocol  - Autorise les clients à accéder à leur email enregistré dans un mail server et maintient les email sur le serveur.
-
-POP (POP3) : Post Office Protocol - Autorise les clients à retrouver leur email à partir d'un mail serveur télécharge les email de l'email server vers le bureau.
-
-SMTP : Simple Mail Transfert Protocol - Autorise les clients à envoyer des email vers les mail server, mais aussi les ses server vers les autres server
-
-EMAIL :
-
-DHCP : Dynamic Host Configuration Protocol : Assigne dynamiquement des adresses IP aux clients au démarrage. Permet de réutiliser les adresses quand elles ne sont plus utilisées.
-
-BOOTP : Bootstrap Protocol : Permet à une station sans disque de travail de découvrir sa propre adresse IP, l'adresse IP d'un BOOTP serveur sur le réseau. Un fichier peut être chargé dans la mémoire de démarrage de la machine. -> Remplacé par DHCP
-
-CONFIGURATION D'HOTE :
-
-DNS : Domain Name Service – Traduit les noms de domaines comme cisco.com en adresse IP
-
-NOM SYSTÈME : 
+  
+####**Couches des différents protocoles**
+  
+ ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/11.png)
 
 APPLICATION  : 
 
- ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/11.png)
- 
-**Protocoles :**
-**Complément sur les virtual Hosts sous Appache2 **
-http://www.installerunserveur.com/creer-des-virtualhost
-C’est donc sur la même @IP, plusieurs sites internet, ou nom de domaine.
--	/etc/apache2/sites-enabled
- 
--	/etc/apache2/sites-available
-![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/13.png)
+NOM SYSTÈME : 
 
-**ARCHITECTURE**
+DNS : Domain Name Service – Traduit les noms de domaines comme cisco.com en adresse IP
+
+CONFIGURATION D'HOTE :
+
+BOOTP : Bootstrap Protocol : Permet à une station sans disque de travail de découvrir sa propre adresse IP, l'adresse IP d'un BOOTP serveur sur le réseau. Un fichier peut être chargé dans la mémoire de démarrage de la machine. -> Remplacé par DHCP
+
+DHCP : Dynamic Host Configuration Protocol : Assigne dynamiquement des adresses IP aux clients au démarrage. Permet de réutiliser les adresses quand elles ne sont plus utilisées.
+
+EMAIL :
+
+SMTP : Simple Mail Transfert Protocol - Autorise les clients à envoyer des email vers les mail server, mais aussi les ses server vers les autres server
+
+POP (POP3) : Post Office Protocol - Autorise les clients à retrouver leur email à partir d'un mail serveur télécharge les email de l'email server vers le bureau.
+
+IMAP : - Internet Message Access Protocol  - Autorise les clients à accéder à leur email enregistré dans un mail server et maintient les email sur le serveur.
+
+TRANSFERT DE FICHIER :
+
+FTP : - File Transfert Protocol - Définit les règles qui autorisent un utilisateur sur un hôte à accéder et transférer les fichiers depuis et vers un autre hôte sur un réseau. Fournit également des fichiers importants.
+
+TFTP : - Trivial File Transfer Protocol – Un protocole sans connexion, sans retour d'accusé de réception - Utilisé moins que le FTP
+
+WEB :
+
+HTTP : HypertText Transfer Protocol - Définit les règles d'échanges de textes, des images, de sons, de vidéos et autres fichiers multimédias sur le WWW.
+
+TRANSPORT : 
+UDP : User Datagram Protocol – Autorise un processus qui tourne sur un hôte à envoyer des paquets à un autre processus sur un autre hôte. N'a pas de confirmation qu'une transmission datagram a bien été effectuée.
+
+TCP : Transmission Control Protocol – Autorise des communications fiables entre les processus tournant sur des hôtes séparés. Fiable, il y a des accusés de réceptions.
+
+INTERNET 
+IP : Internet Protocol - Reçoit les segments de messages des couches transports, paquette les messages, adresse les paquets pour les "end device".
+
+NAT : Network Address Translation -  Transforme les adresses IP privés dans une adresse IP publique.
+IP SUPPORT
+
+ICMP : Internet Control Message Protocol – Fournit un feedback depuis une destination hôte vers une source hôte, à propos des erreurs dans le délivrement des paquets.
+
+ROUTING PROTOCOLS 
+OSPF : Open Shortest Path First – Relie l'état d'un protocole de routage. Désign hiérarchique basé sur des zones. Ouvre un intérieur standard pour les protocoles de routages.
+
+EIGRP : Enhanced Interior Gateway Routing Protocol – La propriété de Cisco sur le routage, utilise des composés métriques basé sur la bande passante, les délais, le chargement et la fiabilité.
+
+ACCES RESEAU 
+ARP : Adress Resolution Protocol – Fournit une adresse dynamique mappé, entre une IP adresse, et un accès physique.
+
+PPP : Point-to-Point Protocol – Fournit un semblant de paquets d'encapsulations pour la transmission sur une liaison série.
+
+Ethernet : Définit les règles pour le câblage et le signalement des standards d'un réseau accédant aux couches.
+
+Interface Drivers : Fournit des instructions à la machine pour contrôler une certaine interface sur un équipement réseau.
+
+
+####**Complément sur les virtual Hosts sous Appache2**
+
+http://www.installerunserveur.com/creer-des-virtualhost
+Un virtual host permet d'installer sur la même adresse IP plusieurs sites internet (noms de domaine).
+
+-	/etc/apache2/sites-enabled (virtual hosts actifs) 
+-	/etc/apache2/sites-available (virtual hosts disponibles)
+![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/13.png)
+  
+  
+###Réalistions
+####**Résoudre le problème**
+####**Connaitre "les 13"**
+Un serveur racine du DNS est un serveur DNS qui réponds aux requêtes qui concernent les noms de domaines de premier niveau TLD) et les redirige vers le serveur DNS de premier niveau concerné (ils sont le '.' au dessus des TLD dans la hiérarchie)
+
+Ils sont gérés sous l’autorité de l’ICANN et sont au nombre de 13
+
+![](imgNico/6.png)
+ 
