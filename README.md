@@ -1,19 +1,11 @@
 **Accès web (DNS, HTTP)**
 --------------------------
-#TO DO
-
-* installer apache
-* créer un virtual host 
-* et des sites web
-* dl postman
-* faire des requêtes (éventuellement sur newbiecontest)
-* rechercher les DNS secure
 
 ##Team
-   * Animateur : **Max**
+   * Animateur : **Hugo**
    * Secrétaire : **Emilien**
    * Scribe : **Nico**
-   * Gestionnaire : **Hugo**
+   * Gestionnaire : **Max**
 
 
 
