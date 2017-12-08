@@ -16,6 +16,7 @@
    * Gestionnaire : **Hugo**
 
 
+
 ## Mots Clés
    * DNS : Domain Name Server 
    * Apache : Serveur HTTP créé et maintenu par la fondation Apache, c’est le plus populaire sur le World Wide Web.
@@ -36,7 +37,6 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
    * enregistrement DNS de type A : Lien entre un nom unique et une @IPv4. Ainsi, on aura un nom de domaine qui pointera sur le serveur trouvé à une @IP données. On y retrouve un TTL, qui lui donne une durée de vie.
    * résolution de nom : Fais référence au DNS.
    * adresse IP 8.8.8.8 : serveur DNS de google.
-    
 
 ## Contexte
 
@@ -58,12 +58,13 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
    * Comment faire en sorte que notre FAI reconnaisse notre DNS
 
 
+    
+
 
 
 
 ## Généralisation
    * MCO : maintenance en condition opérationnelle
-
 ## Hypothèses
  * 8.8.8.8 est l'adresse du DNS de google
  * nslookup donne le domaine dans lequel on est et nous donne l'adresse IP correspondante
@@ -72,11 +73,10 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
  * OVH donne les noms de domaines
    
 ## Plan d'action
-
 ### Études
 #### **DNS**
  
-
+Code d�erreurs :
 **Résolution de noms directe**
 Dans un réseau IP, lorsqu’une machine A veut communiquer avec une machine B, la machine A connaît le nom FQDN de B.
 Par exemple, lorsqu’on navigue sur le net, on connaît en général le nom FQDN des serveurs qu’on visite (exemple www.microsoft.fr.).
@@ -143,7 +143,33 @@ TXT permet à l’admin d’inserer un texte quelconque dans un enregistrement D
   date : date de début du transfert
   
   etc
-
+Code	Message	Description
+10x	Message d'information	Ces codes ne sont pas utilis�s dans la version 1.0 du protocole
+20x	R�ussite	Ces codes indiquent le bon d�roulement de la transaction
+200	OK	La requ�te a �t� accomplie correctement
+201	CREATED	Elle suit une commande POST, elle indique la r�ussite, le corps du reste du document est sens� indiquer l'URL � laquelle le document nouvellement cr�� devrait se trouver.
+202	ACCEPTED	La requ�te a �t� accept�e, mais la proc�dure qui suit n'a pas �t� accomplie
+203	PARTIAL INFORMATION	Lorsque ce code est re�u en r�ponse � une commande GET, cela indique que la r�ponse n'est pas compl�te.
+204	NO RESPONSE	Le serveur a re�u la requ�te mais il n'y a pas d'information � renvoyer
+205	RESET CONTENT	Le serveur indique au navigateur de supprimer le contenu des champs d'un formulaire
+206	PARTIAL CONTENT	Il s'agit d'une r�ponse � une requ�te comportant l'en-t�te range. Le serveur doit indiquer l'en-t�te content-Range
+30x	Redirection	Ces codes indiquent que la ressource n'est plus � l'emplacement indiqu�
+301	MOVED	Les donn�es demand�es ont �t� transf�r�es � une nouvelle adresse
+302	FOUND	Les donn�es demand�es sont � une nouvelle URL, mais ont cependant peut-�tre �t� d�plac�es depuis...
+303	METHOD	Cela implique que le client doit essayer une nouvelle adresse, en essayant de pr�f�rence une autre m�thode que GET
+304	NOT MODIFIED	Si le client a effectu� une commande GET conditionnelle (en demandant si le document a �t� modifi� depuis la derni�re fois) et que le document n'a pas �t� modifi� il renvoie ce code.
+40x	Erreur due au client	Ces codes indiquent que la requ�te est incorrecte
+400	BAD REQUEST	La syntaxe de la requ�te est mal formul�e ou est impossible � satisfaire
+401	UNAUTHORIZED	Le param�tre du message donne les sp�cifications des formes d'autorisation acceptables. Le client doit reformuler sa requ�te avec les bonnes donn�es d'autorisation
+402	PAYMENT REQUIRED	Le client doit reformuler sa demande avec les bonnes donn�es de paiement
+403	FORBIDDEN	L'acc�s � la ressource est tout simplement interdit
+404	NOT FOUND	Classique ! Le serveur n'a rien trouv� � l'adresse sp�cifi�e. Parti sans laisser d'adresse... :)
+50x	Erreur due au serveur	Ces codes indiquent qu'il y a eu une erreur interne du serveur
+500	INTERNAL ERROR	Le serveur a rencontr� une condition inattendue qui l'a emp�ch� de donner suite � la demande (comme quoi il leur en arrive des trucs aux serveurs...)
+501	NOT IMPLEMENTED	Le serveur ne supporte pas le service demand� (on ne peut pas tout savoir faire...)
+502	BAD GATEWAY	Le serveur a re�u une r�ponse invalide de la part du serveur auquel il essayait d'acc�der en agissant comme une passerelle ou un proxy
+503	SERVICE UNAVAILABLE	Le serveur ne peut pas vous r�pondre � l'instant pr�sent, car le trafic est trop dense (toutes les lignes de votre correspondant sont occup�es veuillez rappeler ult�rieurement)
+504	GATEWAY TIMEOUT	La r�ponse du serveur a �t� trop longue vis-�-vis du temps pendant lequel la passerelle �tait pr�par�e � l'attendre (le temps qui vous �tait imparti est maintenant �coul�...)
   Port : 
   * 80 http
   * 443 https
@@ -235,7 +261,6 @@ Représenté
  
 ![](imgNico/5.jpg)
   émilien
-
   récursivité : si le serveur peut demander à un autre serveur
   
   itérative vs récursive : 
@@ -255,7 +280,6 @@ Représenté
 ###Réalistions
 ####**Résoudre le problème**
 ####**Connaitre "les 13"**
-
 Un serveur racine du DNS est un serveur DNS qui réponds aux requêtes qui concernent les noms de domaines de premier niveau TLD) et les redirige vers le serveur DNS de premier niveau concerné (ils sont le '.' au dessus des TLD dans la hiérarchie)
 
 Ils sont gérés sous l’autorité de l’ICANN et sont au nombre de 13
@@ -264,7 +288,6 @@ Ils sont gérés sous l’autorité de l’ICANN et sont au nombre de 13
  
 
  hugo
-
 ![](https://github.com/TL72X211/UE2-Prosit-3-Acces-web-DNS-HTTP/blob/Emilien/Images_Prosit/1.png)
 Ensemble de protocoles pour :
 -	Interroger et MAJ la base de données d’un serveur DNS
