@@ -255,15 +255,7 @@ Représenté
   émilien
   récursivité : si le serveur peut demander à un autre serveur
   
-  itérative vs récursive : 
-  * récursive : attends une réponse
-  * itérative répond au mieux avec ses informations locales 
   
-  serveurs dns
-  bind9
-  opendns
-  answerx
-  le service dns de microsft
   
   serveurs http :
   apache
