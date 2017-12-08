@@ -67,18 +67,43 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
 ## Hypothèses
  * 8.8.8.8 est l'adresse du DNS de google
  * nslookup donne le domaine dans lequel on est et nous donne l'adresse IP correspondante
- * Appache et IIS sont des paquets qui permettent de construire un serveur
+ * Apache et IIS sont des paquets qui permettent de construire un serveur
  * On ne peut demander au FAI de mettre à jour un DNS nous correspondant
  * OVH donne les noms de domaines
    
 ## Plan d'action
 
 ### Études
-  * DNS
-  
-  **Flo** sur definition et hiérarchie
-  **Nico** sur les type d'enregistrement
+#### **DNS**
+ 
 
+**Résolution de noms directe**
+Dans un réseau IP, lorsqu’une machine A veut communiquer avec une machine B, la machine A connaît le nom FQDN de B.
+Par exemple, lorsqu’on navigue sur le net, on connaît en général le nom FQDN des serveurs qu’on visite (exemple www.microsoft.fr.).
+Pour que A puisse communiquer avec B grâce au protocole IP, A va avoir besoin de connaître l’adresse IP de B.
+A doit posséder un moyen d’effectuer la résolution de noms directe, c’est-à-dire un moyen de trouver l’adresse IP de B à partir de son nom qualifié.
+Le résolveur est le programme chargé de cette opération.
+
+**Résolution de noms inverse**
+La machine B reçoit un datagramme IP en provenance de A. Ce datagramme contient l’adresse IP de A. B peut avoir besoin de connaître le nom FQDN de la machine A.
+B doit donc être capable de trouver le nom FQDN de A à partir de son adresse IP. C’est ce qu’on appelle la résolution de noms inverse.
+Le résolveur est également chargé de cette opération.
+
+**Résolution de nom par serveur DNS (Domain Name System)**
+On installe un serveur de noms sur le réseau. Chaque machine du réseau doit connaître l’adresse IP de ce serveur DNS. Dès qu’une machine veut effectuer une résolution de noms directe ou inverse, elle va interroger le serveur de noms. L’administrateur doit configurer le serveur de noms pour que ce dernier connaisse l’adresse IP et le nom de toutes les machines du réseau.
+
+Une bdd dns se compose d’enregistrements de ressource
+
+**Types d’enregistrements :**
+
+A ou adresse fait correspondre un nom d’hôte, de domaine ou sous-domaine en ipv4
+CNAME : canonical name record permet de faire un alias vers un autre domaine
+MX : mail exchange définit les serveurs courriel 
+PTR : pointer record associe un IP à un nom de domaine on l’appelle également reverse puisqu’il fait l’inverse d’un enregistrement A
+NS : name server défini les serveurs DNS de ce domaine
+SOA start of authority : info générales : serveur principal, courriel de contact, TTL, n°de série de la zone (version de la zone
+NAPTR name authority Pointer record : donne accès à des règles de réécriture de l’information ( ?)
+TXT permet à l’admin d’inserer un texte quelconque dans un enregistrement DNS
   * Protocole HTTP
   
   **Pierre M**
@@ -130,7 +155,6 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
   100 = informtion
   200 = ok
   300 = redirection
-  400 = erreur ressource
   500 = erreur serveur
   
   
@@ -149,7 +173,11 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
    * IETF internet engineering taskforce
    * AFNIC IP en france
    * Les registrar qui vendent des noms de domaines (font le relai avec l'ICANN)
-  * Théorie de communication
+####**Théorie de communication**
+Apparue en même temps que la théorie de l’information, son but est de formaliser et modéliser la relation homme-machine 
+Il y a communication lorsqu’on émet ou reçoit un message et qu’on donne une signification au message, ce qui permet de les comprendre
+
+![](imgNico/3.png)
   
   on a un canal (media)
   éméteur
@@ -164,32 +192,48 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
   * langage : structure de la reqête
   * message : post paramètres
   
-  
   * Format des messages (émission/réception)
-    
-    TO DO
-    
+Simplex : de l’un vers l’autre rien d’autre (radio)
+Half duplex : dans les 2 sens mais pas en même temps (walkie-talkie)
+Full-Duplex : 2 sens en même temps
+ 
   * Messages
+Messages dns ?
+Requêtes 
+Réponses
+Mise à jour
+
+![](imgNico/4.png)
+ 
+En-tête DNS : 
+Id de transcription : 16 bits qui identifient une transaction dns spécifique, créé par l expéditeur et copié par le répondeur dans le message de réponse, le client DNS
+Demande/réponse : flag de 1b, 0 pour une demande 1 pour une réponse
+Code d’opération : 4 bits représentant l’opération de service de nom du paquet
+Réponse faisant autorité : flag
+Troncature : flag 1 si le nombre total de réponses dépasse le datagrame UDP, sauf si les datagrames UDP > 512 octets ou EDNS0 est activé
+Récursivité souhaitée : flag 1 récusif, 0 non récursif, si le serveur DNS reçoit un message avec ce flag a 0 il retourne une liste d’autre serveurs DNS que le client peut contacter
+Récursivité disponible : flag 1 = le serveur peut traiter les requêtes récursives
+Réservé : 3bis réservés à 0
+Code de retour : 4its de code d’erreur, par exemple :0 = réponse correcte,  3 erreur nom non existant
+Nb d’enregistrements de ressource de question : 16bits représentant le nb d’entrées dans la section question
+Nb d’enregistrement de ressource réponse : 16bits nb d’entrée dans la section réponse
+Nb d’enregistrement de ressource autorité : 16bits
+Nb d’enregistrement de ressources supplémentaire : 16bits
+
+Question de requête DNS :
+Nom de la question : nom de domaine interrogé
+Représenté 
+
   * Canaux de communication
-  
-      * cuivres
-      * fibres
-      * ondes
-      
-  * Couches des différents protocoles
-  
-  HTPP et DNS sont dans application
-  
-  Pierre M
-  
-  ICMP : protocole utilisé par ping
-  ARP : lie une adresse MAC à un hôte
-  802.2, .3, .4, .5 normes ISO
-  
+    * Media de transmission de l’information
+    * Cuivres
+    * Fibre optique
+    * Ondes électromagnétiques
   * Implémentation des protocoles
   
-  en-tête DNS:
-  
+####**Couches des différents protocoles**
+ 
+![](imgNico/5.jpg)
   émilien
 
   récursivité : si le serveur peut demander à un autre serveur
@@ -208,11 +252,16 @@ L'activité de registrar est complémentaire avec celles d'hébergeur, de fourni
   apache
   enginex
   light
-  
-  
 ###Réalistions
-* Résoudre le problème 
-* Connaitre "les 13"
+####**Résoudre le problème**
+####**Connaitre "les 13"**
+
+Un serveur racine du DNS est un serveur DNS qui réponds aux requêtes qui concernent les noms de domaines de premier niveau TLD) et les redirige vers le serveur DNS de premier niveau concerné (ils sont le '.' au dessus des TLD dans la hiérarchie)
+
+Ils sont gérés sous l’autorité de l’ICANN et sont au nombre de 13
+
+![](imgNico/6.png)
+ 
 
  hugo
 
